@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: busybox
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - sleep 3000
+      nodeSelector:
+        openyurt.io/is-edge-worker: "true"

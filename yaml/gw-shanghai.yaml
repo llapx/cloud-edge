@@ -1,0 +1,9 @@
+apiVersion: raven.openyurt.io/v1alpha1
+kind: Gateway
+metadata:
+  name: gw-shanghai
+spec:
+  endpoints:
+    - nodeName: edge-shanghai
+      underNAT: true
+
