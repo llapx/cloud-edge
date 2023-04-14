@@ -1,10 +1,12 @@
 #!/bin/bash
 
 LOG=/tmp/k8s_init.log
+REPO_ALIYUN=registry.aliyuncs.com/google_containers
+REPO_DEFAULT=registry.k8s.io
 
 kubeadm init \
  --node-name ${NODE_NAME} \
-    --image-repository registry.aliyuncs.com/google_containers | tee -a ${LOG}
+    --image-repository ${REPO_ALIYUN} | tee -a ${LOG}
 # check the result
 cat ${LOG} | grep -q "initialized successfully" || (rm -f ${LOG} && exit 1)
 rm -f ${LOG}
