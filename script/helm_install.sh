@@ -2,8 +2,8 @@
 
 HELM_PKG=helm-v3.11.2-linux-amd64.tar.gz
 CHECKSUM=${HELM_PKG}.sha256sum
-HELM_URL=https://get.helm.sh/${HELM_PKG}
-CHECKSUM_URL=https://get.helm.sh/${CHECKSUM}
+HELM_URL=https://github.com/llapx/cloud-edge/releases/download/release-0.0.1/${HELM_PKG}
+CHECKSUM_URL=https://github.com/llapx/cloud-edge/releases/download/release-0.0.1/${CHECKSUM}
 
 if [ ! -f "${PKG_DIR}/${HELM_PKG}" ] || [ ! -f "${PKG_DIR}/${CHECKSUM}" ]; then
     wget -P ${PKG_DIR} ${HELM_URL}

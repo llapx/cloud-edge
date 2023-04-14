@@ -4,6 +4,7 @@ export ROOT_DIR=$(realpath $(dirname $(realpath $0))/..)
 export SCRIPT_DIR=${ROOT_DIR}/script
 export YAML_DIR=${ROOT_DIR}/yaml
 export PKG_DIR=${ROOT_DIR}/pkg
+export BIN_DIR=${ROOT_DIR}/bin
 export K8S_DIR=${ROOT_DIR}/k8s
 export OPENYURT_DIR=${ROOT_DIR}/openyurt
 
@@ -67,6 +68,8 @@ fn_install() {
         exec ${SCRIPT_DIR}/helm_install.sh
     elif [ "$1" == "k8s" ]; then
         exec ${SCRIPT_DIR}/k8s_install.sh
+    elif [ "$1" == "yurt" ]; then
+        exec ${SCRIPT_DIR}/openyurt_install.sh
     else
         fn_help 3
     fi
@@ -77,6 +80,8 @@ fn_uninstall() {
         exec ${SCRIPT_DIR}/helm_uninstall.sh
     elif [ "$1" == "k8s" ]; then
         exec ${SCRIPT_DIR}/k8s_uninstall.sh
+    elif [ "$1" == "yurt" ]; then
+        exec ${SCRIPT_DIR}/openyurt_uninstall.sh
     else
         fn_help 4
     fi
