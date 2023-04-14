@@ -2,16 +2,16 @@
 
 LOG=/tmp/k8s_init.log
 
-sudo kubeadm init \
-    --node-name ${NODE_NAME} \
+kubeadm init \
+ --node-name ${NODE_NAME} \
     --image-repository registry.aliyuncs.com/google_containers | tee -a ${LOG}
 # check the result
 cat ${LOG} | grep -q "initialized successfully" || (rm -f ${LOG} && exit 1)
 rm -f ${LOG}
 
 mkdir -p ${HOME}/.kube
-sudo cp -i /etc/kubernetes/admin.conf ${HOME}/.kube/config
-sudo chown $(id -u):$(id -g) ${HOME}/.kube/config
+cp -i /etc/kubernetes/admin.conf ${HOME}/.kube/config
+chown $(id -u):$(id -g) ${HOME}/.kube/config
 
 sleep 3
 kubectl apply -f ${YAML_DIR}/weave-daemonset-k8s.yaml

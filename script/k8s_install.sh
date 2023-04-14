@@ -1,19 +1,12 @@
 #!/bin/bash
 
-INSTALL_DIR=/usr/local/bin
-CNI_DIR=/opt/cni/bin
-CNI_PKG=${PKG_DIR}/cni-plugins-linux-amd64-v1.2.0.tgz
+apt-get update
+apt-get install -y socat conntrack apt-transport-https ca-certificates curl
 
-mkdir -p ${INSTALL_DIR}
-mkdir -p ${CNI_DIR}
-mkdir -p /etc/systemd/system/kubelet.service.d
+mkdir -p /etc/apt/keyings
+curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+apt-get update
 
-install -m=755 ${K8S_DIR}/bin/{kubectl,kubeadm,kubelet} ${INSTALL_DIR}
-tar -xvf ${CNI_PKG} -C ${CNI_DIR}
-
-cat ${K8S_DIR}/systemd/kubelet.service | sed "s:/usr/bin:${INSTALL_DIR}:g" | tee /etc/systemd/system/kubelet.service
-cat ${K8S_DIR}/conf/10-kubeadm.conf | sed "s:/usr/bin:${INSTALL_DIR}:g" | sudo tee /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-
-sleep 3
-
-systemctl enable --now kubelet
+apt-get install -y kubeadm=1.23.17-00 kubectl=1.23.17-00 kubelet=1.23.17-00 kubernetes-cni=1.2.0-00
+apt-mark hold kubelet kubeadm kubectl
