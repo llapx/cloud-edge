@@ -5,7 +5,8 @@ REPO_ALIYUN=registry.aliyuncs.com/google_containers
 REPO_DEFAULT=registry.k8s.io
 
 kubeadm init \
- --node-name ${NODE_NAME} \
+    --node-name ${NODE_NAME} \
+    --apiserver-advertise-address ${MASTER_IP} \
     --image-repository ${REPO_ALIYUN} | tee -a ${LOG}
 # check the result
 cat ${LOG} | grep -q "initialized successfully" || (rm -f ${LOG} && exit 1)
@@ -18,8 +19,7 @@ chown $(id -u):$(id -g) ${HOME}/.kube/config
 sleep 3
 kubectl apply -f ${YAML_DIR}/weave-daemonset-k8s.yaml
 # waiting for master node startup.
-while true
-do
+while true; do
     kubectl get nodes ${NODE_NAME} | grep -qw "Ready" && break
     sleep 3
 done
