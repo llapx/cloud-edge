@@ -45,9 +45,9 @@ metadata:
 apiVersion: v1
 data:
   vpn-connection-psk: |
-    MWIzZWFmODJiMjY2ODY2MzA5MjNlMTEyODhmNzFkNWQzNmY4NWVmMTVhYzE5MzA1YmY5MT
-    Q2OTQ4N2JhY2M3ZDM5NDc1NjZlNjJmMDQ5OGUyZDE5ODNjYTdiMGQ5MGE5MTQ0MWUzYzA0
-    YzA1MTM4MDY1NGFhYmQ5YjBlMDc1NjI=
+    NGQ3MTY1YTI4NzMyOTUxYzk4MGFlOTBlYjcwZDIyZjZjM2E4YjNiYWU3MzhhMzI1ZTI5ZW
+    E1NTM4ZjdiZTZlMWQ0Y2NkMjQ5ZWVkNWIwNjFhMjFkODZiYWVkN2E2MjA5YjZkNWYwNGVm
+    NzI4ZWQyYmVkMzEyMWQxNDI5MTRmYjE=
 kind: Secret
 metadata:
   name: raven-agent-secret
@@ -105,8 +105,8 @@ spec:
           privileged: true
       hostNetwork: true
       nodeSelector:
-        kubernetes.io/arch: amd64
-        kubernetes.io/os: linux
+        beta.kubernetes.io/arch: amd64
+        beta.kubernetes.io/os: linux
       serviceAccountName: raven-agent-account
       tolerations:
       - operator: Exists
