@@ -4,7 +4,7 @@ CHART_DIR=${OPENYURT_DIR}/charts
 
 kubectl label node ${NODE_NAME} openyurt.io/is-edge-worker=false
 
-sudo iptables -w -P FORWARD ACCEPT
+iptables -w -P FORWARD ACCEPT
 
 # deploy yurt-app-manager
 helm install yurt-app-manager -n kube-system ${CHART_DIR}/yurt-app-manager

@@ -9,7 +9,8 @@ apt-get update
 apt-get install -y socat conntrack apt-transport-https ca-certificates curl
 
 mkdir -p /etc/apt/keyings
-curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg ${URL_ALYYUN}/apt/doc/apt-key.gpg
+#curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg ${URL_ALYYUN}/apt/doc/apt-key.gpg
+curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] ${APT_ALIYUN} kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt-get update
 

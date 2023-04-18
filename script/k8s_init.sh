@@ -6,7 +6,6 @@ REPO_DEFAULT=registry.k8s.io
 
 kubeadm init \
     --node-name ${NODE_NAME} \
-    --apiserver-advertise-address ${MASTER_IP} \
     --image-repository ${REPO_ALIYUN} | tee -a ${LOG}
 # check the result
 cat ${LOG} | grep -q "initialized successfully" || (rm -f ${LOG} && exit 1)
